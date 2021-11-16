@@ -1,0 +1,60 @@
+<!-- Tester si un pokemon existe pour executer ce bloc de code -->
+
+<div *ngIf="pokemonToDisplay" class="row">
+  <div class="col s12 m8 offset-m2">
+    <h2 class="header center">{{ pokemonToDisplay.name }}</h2>
+    <div class="card horizontal hoverable">
+      <div class="card-image">
+        <img [src]="pokemonToDisplay.picture">
+      </div>
+      <div class="card-stacked">
+        <div class="card-content">
+          <table class="bordered striped">
+            <tbody>
+            <tr>
+              <td>Nom</td>
+              <td><strong>{{ pokemonToDisplay.name }}</strong></td>
+            </tr>
+            <tr>
+              <td>Points de vie</td>
+              <td><strong>{{ pokemonToDisplay.hp }}</strong></td>
+            </tr>
+            <tr>
+              <td>Dégâts</td>
+              <td><strong>{{ pokemonToDisplay.cp }}</strong></td>
+            </tr>
+            <tr>
+              <td>Types</td>
+              <td>
+                <!-- Utilisation de la pipe créée précédemment pour afficher les types -->
+                <span *ngFor="let type of pokemonToDisplay.types" class="{{ type | pokemonTypeColor }}">{{ type }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Date de création</td>
+              <!-- Utilisation de la (| date: format ) pour formater les dates a afficher -->
+              <td><em>{{ pokemonToDisplay.created | date:"dd/MM/yyyy" }}</em></td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+<div class="card-action">
+    <a type="button" class="waves-effect waves-light btn" (click)="goBack()">Retour</a>
+    <a type="button" class="waves-effect waves-light btn" (click)="editerPokemon(pokemonToDisplay)">Editer</a>
+    <a type="button" class="waves-effect waves-light btn" (click)="supprimerPokemon(pokemonToDisplay)">Supprimer</a>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Sinon, si aucun pokemon n'a été trouvé on execute cette partie -->
+<!--<h4 *ngIf='!pokemonToDisplay' class="center">Aucun pokémon à afficher !</h4>-->
+<!--<h4 *ngIf='!pokemonToDisplay' class="center">
+aucun pokémon à afficher
+</h4>-->
+<h4 *ngIf='!pokemonToDisplay' class="center">
+  <app-loader-component></app-loader-component>
+  </h4>

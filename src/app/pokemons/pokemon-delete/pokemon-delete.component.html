@@ -1,0 +1,5 @@
+<h2 class="header center" > Supprimer {{singlePokemon?.name}}  </h2>
+<p class="center">
+    <img *ngIf="singlePokemon" [src]="singlePokemon.picture"/>
+</p>
+<app-pokemon-form [pokemon]="singlePokemon"></app-pokemon-form>
